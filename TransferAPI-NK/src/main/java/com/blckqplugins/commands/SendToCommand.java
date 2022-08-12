@@ -10,7 +10,8 @@ import java.sql.Array;
 
 public class SendToCommand extends Command {
     public SendToCommand(String name) {
-        super(name, "SendTo Command", "/sendto <server> <player (default: your name)>", new String[]{"tansferto", "sendto"});
+        super(name, "SendTo Command", "/sendto <server> <player (default: your name)>");
+        this.setAliases(new String[]{"transferto"});
         this.setPermission("transferapi.sendto");
     }
 
@@ -41,6 +42,8 @@ public class SendToCommand extends Command {
         if (transferPlayer != null) {
             transferPlayer.sendMessage("§aYou will be transferred to §e" + server + "§8.");
             TransferAPI.transferPlayer(transferPlayer, server);
+        } else {
+            sender.sendMessage("§cThe player §e" + player + " §cis not online.");
         }
         return false;
     }
